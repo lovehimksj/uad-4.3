@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {Router} from '@angular/router';
-import { AuthenticationService } from '../service/auth/authentication.service';
 
 @Component({
   selector: 'app-advertiser',
@@ -8,12 +6,11 @@ import { AuthenticationService } from '../service/auth/authentication.service';
   styleUrls: ['./advertiser.component.css']
 })
 export class AdvertiserComponent implements OnInit {
-  constructor(private authenticationService: AuthenticationService,
-              private router: Router) { }
-  ngOnInit() {
-  }
+  constructor() { }
   logoutUser() {
-    this.authenticationService.logout();
-    this.router.navigate(['/']);
+    // this.authenticationService.logout();
+    // this.router.navigate(['/']);
+  }
+  ngOnInit() {
   }
 }

@@ -42,3 +42,30 @@ editPublisher: 'up/?',
 getReport: 'gr/?',
 downloadReport: 'dr/?',
 createReport: 'cr/?'
+
+
+
+
+
+
+
+
+
+
+
+
+var bg = document.querySelector('.black_bg');
+bg.classList.add('is-visible');
+bg.classList.remove('is-visible');
+
+else { /** @Any error*/
+    if(response.status === 403 || response.status === 401) {
+        $scope.noAccess = true;
+        $scope.errorMessage = response.headers['message'] !== undefined ? response.headers['message'] : httpConstantMessage.notPermitted;
+        $scope.errorHeading = httpConstantMessage[response.status].replace('~value~', 'User');
+    } else {
+        $scope.errorMessage = response.headers['message'] !== undefined ? response.headers['message'] : httpConstantMessage.criticalErrorMessage;
+        $scope.errorHeading = response.status > 0 ? httpConstantMessage[response.status].replace('~value~', 'Campaign') : httpConstantMessage.criticalErrorCode;
+    }
+    $scope.dialogBoxOpen();
+}

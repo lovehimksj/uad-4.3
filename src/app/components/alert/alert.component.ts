@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {AlertService} from '../../service/http/alert.service';
 
 @Component({
+  moduleId: module.id,
   selector: 'app-alert',
   templateUrl: './alert.component.html',
   styleUrls: ['./alert.component.css']
@@ -14,7 +15,6 @@ export class AlertComponent implements OnInit {
     this.alertService.getMessage().subscribe(
       data => {
         this.message = data;
-        console.log(this.message);
     }
     )
   }

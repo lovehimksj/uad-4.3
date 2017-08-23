@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {AuthenticationService} from '../service/auth/authentication.service';
 import sha256 from 'crypto-js/sha256';
 import {AlertService} from '../service/http/alert.service';
+import {UserService} from '../service/user/user.service';
+import {AuthenticationService} from '../service/auth/authentication.service';
 
 @Component({
   selector: 'app-login',
@@ -19,25 +20,29 @@ export class LoginComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private authenticationService: AuthenticationService,
+    private userService: UserService,
     private alertService: AlertService
   ) { }
 
   ngOnInit() {
-    // console.log(sha256('ahoy123').toString());
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
   login() {
     this.loading = true;
-    this.authenticationService.login(this.model.username, sha256(this.model.password).toString())
+    this.userService.login(this.model.username, sha256(this.model.password).toString())
       .subscribe(
         data => {
-          this.user = data;
-          console.log(this.user.scope);
-          console.log(this.returnUrl);
-          if (this.user.scope === 'admin') {
-            this.router.navigate(['admin']);
-          } else if (this.user.scope === 'advertiser') {
-            this.router.navigate(['advertiser']);
+          if (data.status === 200) {
+            this.user = data.json();
+            this.authenticationService.setCredential(this.user.userid, this.user.scope, this.user.access_token, this.user.refresh_token);
+            if (this.user.scope === 'admin' || this.user.scope === 'adteam') {
+              console.log(this.user.scope);
+              this.router.navigate(['admin']);
+            } else if (this.user.scope === 'advertiser') {
+              console.log(this.user.scope);
+              this.router.navigate(['advertiser']);
+            }
+            this.loading = false;
           }
           // this.router.navigate([this.returnUrl]);
         },
@@ -49,5 +54,4 @@ export class LoginComponent implements OnInit {
         }
       )
   }
-
 }
