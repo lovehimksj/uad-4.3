@@ -6,10 +6,10 @@ export class AuthenticationService {
   constructor(private cookieService: CookieService) { }
   // setter
   public setUserId(id: string) {
-    localStorage.setItem('id', id);
+    this.cookieService.putObject('id', id);
   };
   public setUserScope(scope: string) {
-    localStorage.setItem('scope', scope);
+    this.cookieService.putObject('scope', scope);
   };
   public setAccessToken(access_token: string) {
     this.cookieService.putObject('access_token', access_token, {'expires': '12-12-2019'})
@@ -19,13 +19,12 @@ export class AuthenticationService {
   };
   // getter
   public getUserId() {
-    return localStorage.getItem('id') !== null ? localStorage.getItem('id') : '';
+    return this.cookieService.getObject('id') !== null ? this.cookieService.getObject('id') : '';
   };
   public getUserScope() {
-    return localStorage.getItem('scope')['scope'] !== null ? localStorage.getItem('scope')['scope'] : ''
+    return this.cookieService.getObject('scope') !== null ? this.cookieService.getObject('scope') : ''
   };
   public getAccessToken() {
-    // return localStorage.getItem('access_token') !== null ? localStorage.getItem('access_token') : ''
     return this.cookieService.getObject('access_token') !== undefined ? this.cookieService.getObject('access_token') : '';
   };
   public getRefreshToken() {

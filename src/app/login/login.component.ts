@@ -34,7 +34,6 @@ export class LoginComponent implements OnInit {
         data => {
           if (data.status === 200) {
             this.user = data.json();
-            this.authenticationService.setCredential(this.user.userid, this.user.scope, this.user.access_token, this.user.refresh_token);
             if (this.user.scope === 'admin' || this.user.scope === 'adteam') {
               console.log(this.user.scope);
               this.router.navigate(['admin']);
