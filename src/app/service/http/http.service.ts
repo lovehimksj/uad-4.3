@@ -1,28 +1,19 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
+import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
-
-@Injectable()
-export class HttpService {
-  constructor(private http: HttpClient) { }
-  get<t>(url: string): Observable<t> {
-    return this.http.get<t>(url);
-  }
-  post<t>(url: string, body: string): Observable<t> {
-    return this.http.post<t>(url, body);
-  }
-}
+import {AuthenticationService} from '../auth/authentication.service';
 
 @Injectable()
 export class ApiInterceptor implements HttpInterceptor {
-  constructor() {}
-
+  constructor(
+    private authenticationService: AuthenticationService
+  ) {}
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const token: string = localStorage.getItem('currentUser')['access_token'];
-    console.log(req);
     // add it if we have one
-    if (token) {
-      req = req.clone({ headers: req.headers.set('Authorization', 'Bearer ' + token) });
+    if (this.authenticationService.isAuthenticate()) {
+      req = req.clone({ headers: req.headers.set('Authorization', 'Bearer ' + this.authenticationService.getAccessToken()) });
+    } else {
+      this.authenticationService.removeCredentials();
     }
     // else {
     //   // setting the accept header

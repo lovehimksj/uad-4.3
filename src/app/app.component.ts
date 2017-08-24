@@ -12,12 +12,12 @@ export class AppComponent implements OnInit {
     private authenticationService: AuthenticationService,
     private router: Router
   ) { }
-  ngOnInit() {
-    console.log(this.authenticationService.getAccessToken());
+  ngOnInit(): void {
+    console.log(this.authenticationService.getUserScope());
     if (this.authenticationService.isAuthenticate()) {
       if (this.authenticationService.getUserScope() === 'advertiser') {
         this.router.navigate(['advertiser']);
-      } else if (this.authenticationService.getUserScope() === 'admin' && this.authenticationService.getUserScope() === 'adteam') {
+      } else if (this.authenticationService.getUserScope() === 'admin' || this.authenticationService.getUserScope() === 'adteam') {
         this.router.navigate(['admin'])
       } else {
         this.router.navigate(['/'])

@@ -6,36 +6,36 @@ export class AuthenticationService {
   constructor(private cookieService: CookieService) { }
   // setter
   public setUserId(id: string) {
-    localStorage.setItem('id', id);
+    this.cookieService.putObject('id', id);
   };
   public setUserScope(scope: string) {
-    localStorage.setItem('scope', scope);
+    this.cookieService.putObject('scope', scope);
   };
-  public setAccessToken(access_token: string) {
-    this.cookieService.putObject('access_token', access_token, {'expires': '12-12-2019'})
+  public setAccessToken(access_token: string, expires_in: any) {
+    let d = new Date();
+    d = new Date(d.getTime() + 1000 * expires_in);
+    this.cookieService.putObject('access_token', access_token, {'expires': d.toUTCString()})
   };
   public setRefreshToken(refresh_token: string) {
-    this.cookieService.putObject('refresh_token', refresh_token, {'expires': '12-12-2019'});
+    let d = new Date();
+    d = new Date(d.getTime() + 24 * 60 * 60 * 1000);
+    this.cookieService.putObject('refresh_token', refresh_token, {'expires': d.toUTCString()});
   };
   // getter
   public getUserId() {
-    return localStorage.getItem('id') !== null ? localStorage.getItem('id') : '';
+    return this.cookieService.getObject('id') !== null ? this.cookieService.getObject('id') : '';
   };
   public getUserScope() {
-    return localStorage.getItem('scope')['scope'] !== null ? localStorage.getItem('scope')['scope'] : ''
+    return this.cookieService.getObject('scope') !== null ? this.cookieService.getObject('scope') : ''
   };
   public getAccessToken() {
-    // return localStorage.getItem('access_token') !== null ? localStorage.getItem('access_token') : ''
     return this.cookieService.getObject('access_token') !== undefined ? this.cookieService.getObject('access_token') : '';
   };
   public getRefreshToken() {
     return this.cookieService.getObject('refresh_token') !== null ? this.cookieService.getObject('refresh_token') : ''
   };
-  public setCredential(id, scope, access_token, refresh_token) {
-    this.setUserId(id);
-    this.setUserScope(scope);
-    this.setAccessToken(access_token);
-    this.setRefreshToken(refresh_token);
+  public removeCredentials() {
+    this.cookieService.removeAll();
   }
   public isAuthenticate() {
     if (this.getRefreshToken() !== '') {

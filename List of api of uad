@@ -43,29 +43,112 @@ getReport: 'gr/?',
 downloadReport: 'dr/?',
 createReport: 'cr/?'
 
+Spring OAuth In Uad
+==================
+
+
+1.	Oauth access token request
+--------------------------------------------------------
+ Access tokens are credentials used to access protected resources. An access token is a string representing an authorization issued to the client.
+
+Protocol Flow
+
+     +--------+                               +---------------+
+     |        |--(A)- Authorization Request ->|   Resource    |
+     |        |                               |     Owner     |
+     |        |<-(B)-- Authorization Grant ---|               |
+     |        |                               +---------------+
+     |        |
+     |        |                               +---------------+
+     |        |--(C)-- Authorization Grant -->| Authorization |
+     | Client |                               |     Server    |
+     |        |<-(D)----- Access Token -------|               |
+     |        |                               +---------------+
+     |        |
+     |        |                               +---------------+
+     |        |--(E)----- Access Token ------>|    Resource   |
+     |        |                               |     Server    |
+     |        |<-(F)--- Protected Resource ---|               |
+     +--------+                               +---------------+
 
 
 
+Request (POST)
+--------------------------
+http://localhost:8080/uadtest/oauth/token?grant_type=password&username=admin&password=admin
 
+Basic Authentication, [Username: ahoy_client, Password: uad_secret]
+Custom Header, [Name: Accept, Value: application/json]
 
-
-
-
-
-
-
-var bg = document.querySelector('.black_bg');
-bg.classList.add('is-visible');
-bg.classList.remove('is-visible');
-
-else { /** @Any error*/
-    if(response.status === 403 || response.status === 401) {
-        $scope.noAccess = true;
-        $scope.errorMessage = response.headers['message'] !== undefined ? response.headers['message'] : httpConstantMessage.notPermitted;
-        $scope.errorHeading = httpConstantMessage[response.status].replace('~value~', 'User');
-    } else {
-        $scope.errorMessage = response.headers['message'] !== undefined ? response.headers['message'] : httpConstantMessage.criticalErrorMessage;
-        $scope.errorHeading = response.status > 0 ? httpConstantMessage[response.status].replace('~value~', 'Campaign') : httpConstantMessage.criticalErrorCode;
-    }
-    $scope.dialogBoxOpen();
+Response
+--------------------------
+{
+  "access_token": "c2b549f9-2ba1-4349-9393-2499490be44f",
+  "token_type": "bearer",
+  "refresh_token": "6cd698ca-9a92-44be-9252-4335b2d57cda",
+  "expires_in": 3599,
+  "scope": "read write trust"
 }
+
+Credentials
+--------------------------
+[username: admin, password: admin, role: admin]
+[username: user, password: user, role: user]
+
+
+2.	Oauth2 refresh token request
+---------------------------------------------------------
+Refresh tokens are credentials used to obtain access tokens.  Refresh tokens are issued to the client by the authorization server and are
+used to obtain a new access token when the current access token becomes invalid or expires.
+
+
+Refresh Token Flow
+
+  +--------+                                           +---------------+
+  |        |--(A)------- Authorization Grant --------->|               |
+  |        |                                           |               |
+  |        |<-(B)----------- Access Token -------------|               |
+  |        |               & Refresh Token             |               |
+  |        |                                           |               |
+  |        |                            +----------+   |               |
+  |        |--(C)---- Access Token ---->|          |   |               |
+  |        |                            |          |   |               |
+  |        |<-(D)- Protected Resource --| Resource |   | Authorization |
+  | Client |                            |  Server  |   |     Server    |
+  |        |--(E)---- Access Token ---->|          |   |               |
+  |        |                            |          |   |               |
+  |        |<-(F)- Invalid Token Error -|          |   |               |
+  |        |                            +----------+   |               |
+  |        |                                           |               |
+  |        |--(G)----------- Refresh Token ----------->|               |
+  |        |                                           |               |
+  |        |<-(H)----------- Access Token -------------|               |
+  +--------+           & Optional Refresh Token        +---------------+
+
+
+Request (POST)
+---------------------------
+http://localhost:8080/authServer/oauth/token?grant_type=refresh_token&refresh_token=6cd698ca-9a92-44be-9252-4335b2d57cda
+
+Basic Authentication, [Username: ahoy_client, Password: uad_secret]
+Custom Header, [Name: Accept, Value: application/json]
+
+Response
+---------------------------
+{
+  "access_token": "94b3af0b-3818-4dff-bee3-9b33ee442d2e",
+  "token_type": "bearer",
+  "refresh_token": "1c8805ec-3600-4e7a-b7ee-547d3840bad3",
+  "expires_in": 3599,
+  "scope": "read write trust"
+}
+
+
+3.	Protected Resource
+-----------------------------------------
+
+[role: user]
+http://localhost:8080/uadtest/getac?aid=1&access_token=2f679beb-5895-464a-8f36-a0adb2ef136d
+
+[role: admin]
+http://localhost:8080/uadtest/apfc?cid=1&access_token=2f679beb-5895-464a-8f36-a0adb2ef136d

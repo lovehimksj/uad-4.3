@@ -3,7 +3,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import sha256 from 'crypto-js/sha256';
 import {AlertService} from '../service/http/alert.service';
 import {UserService} from '../service/user/user.service';
-import {AuthenticationService} from '../service/auth/authentication.service';
+// import {AuthenticationService} from '../service/auth/authentication.service';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +19,6 @@ export class LoginComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private authenticationService: AuthenticationService,
     private userService: UserService,
     private alertService: AlertService
   ) { }
@@ -29,12 +28,12 @@ export class LoginComponent implements OnInit {
   }
   login() {
     this.loading = true;
-    this.userService.login(this.model.username, sha256(this.model.password).toString())
+    this.userService.loginUser(this.model.username, sha256(this.model.password).toString())
       .subscribe(
         data => {
           if (data.status === 200) {
             this.user = data.json();
-            this.authenticationService.setCredential(this.user.userid, this.user.scope, this.user.access_token, this.user.refresh_token);
+            console.log(this.user.scope);
             if (this.user.scope === 'admin' || this.user.scope === 'adteam') {
               console.log(this.user.scope);
               this.router.navigate(['admin']);
@@ -43,8 +42,9 @@ export class LoginComponent implements OnInit {
               this.router.navigate(['advertiser']);
             }
             this.loading = false;
+          } else {
           }
-          // this.router.navigate([this.returnUrl]);
+          this.router.navigate([this.returnUrl]);
         },
         error => {
           this.errors = error['_body'];

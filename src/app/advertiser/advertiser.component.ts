@@ -7,10 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdvertiserComponent implements OnInit {
   constructor() { }
-  logoutUser() {
-    // this.authenticationService.logout();
-    // this.router.navigate(['/']);
-  }
+
   ngOnInit() {
   }
 }

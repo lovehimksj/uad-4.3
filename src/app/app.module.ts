@@ -14,7 +14,7 @@ import { AuthenticationService} from './service/auth/authentication.service';
 import { AdminComponent } from './admin/admin.component';
 import { RegisterComponent } from './register/register.component';
 import { CampaignService } from './service/campaign/campaign.service';
-import { ApiInterceptor } from './service/http/http.service';
+import {ApiInterceptor} from './service/http/http.service';
 import { AlertComponent } from './components/alert/alert.component';
 import {AlertService} from './service/http/alert.service';
 import {UserService} from './service/user/user.service';
