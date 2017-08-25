@@ -1,9 +1,13 @@
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthenticationService {
-  constructor(private cookieService: CookieService) { }
+  constructor(
+    private cookieService: CookieService,
+    private router: Router
+  ) { }
   // setter
   public setUserId(id: string) {
     this.cookieService.putObject('id', id);
@@ -36,6 +40,7 @@ export class AuthenticationService {
   };
   public removeCredentials() {
     this.cookieService.removeAll();
+    this.router.navigate(['/']);
   }
   public isAuthenticate() {
     if (this.getRefreshToken() !== '') {

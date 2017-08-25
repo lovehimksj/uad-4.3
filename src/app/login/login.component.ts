@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+    // this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
   login() {
     this.loading = true;
@@ -42,9 +42,7 @@ export class LoginComponent implements OnInit {
               this.router.navigate(['advertiser']);
             }
             this.loading = false;
-          } else {
           }
-          this.router.navigate([this.returnUrl]);
         },
         error => {
           this.errors = error['_body'];

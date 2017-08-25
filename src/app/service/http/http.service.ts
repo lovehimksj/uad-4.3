@@ -13,7 +13,7 @@ export class ApiInterceptor implements HttpInterceptor {
     if (this.authenticationService.isAuthenticate()) {
       req = req.clone({ headers: req.headers.set('Authorization', 'Bearer ' + this.authenticationService.getAccessToken()) });
     } else {
-      this.authenticationService.removeCredentials();
+      // this.authenticationService.removeCredentials();
     }
     // else {
     //   // setting the accept header

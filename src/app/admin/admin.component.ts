@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {CampaignService} from '../service/campaign/campaign.service';
+import {AuthenticationService} from '../service/auth/authentication.service';
 
 @Component({
   selector: 'app-admin',
@@ -9,14 +10,14 @@ import {CampaignService} from '../service/campaign/campaign.service';
 export class AdminComponent implements OnInit {
 
   constructor(
-    private campaignService: CampaignService
+    private campaignService: CampaignService,
+    private authenticationService: AuthenticationService,
   ) { }
 
   ngOnInit(): void {
     this.campaignService.dashboardCampaign();
   }
-  // logoutUser() {
-  //   // this.authenticationService.logout();
-  //   // this.router.navigate(['/']);
-  // }
+  logout() {
+    this.authenticationService.removeCredentials();
+  }
 }
