@@ -24,7 +24,8 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    // this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+    console.log(this.returnUrl);
   }
   login() {
     this.loading = true;
@@ -33,12 +34,9 @@ export class LoginComponent implements OnInit {
         data => {
           if (data.status === 200) {
             this.user = data.json();
-            console.log(this.user.scope);
             if (this.user.scope === 'admin' || this.user.scope === 'adteam') {
-              console.log(this.user.scope);
               this.router.navigate(['admin']);
             } else if (this.user.scope === 'advertiser') {
-              console.log(this.user.scope);
               this.router.navigate(['advertiser']);
             }
             this.loading = false;

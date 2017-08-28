@@ -15,7 +15,6 @@ export class CampaignService {
         return response
       });
   }
-
   getCampaigns() {
     return this.http.get('http://ads.uahoy.in/uadtest/getac/?&aid=' + this.authenticationService.getUserId())
       .map((response: Response) => {
