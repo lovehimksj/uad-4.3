@@ -9,6 +9,9 @@ export class AuthenticationService {
     private router: Router
   ) { }
   // setter
+  public setUser(username: string) {
+    this.cookieService.putObject('username', username);
+  };
   public setUserId(id: string) {
     this.cookieService.putObject('id', id);
   };
@@ -26,6 +29,9 @@ export class AuthenticationService {
     this.cookieService.putObject('refresh_token', refresh_token, {'expires': d.toUTCString()});
   };
   // getter
+  public getUser() {
+    return this.cookieService.getObject('username') !== null ? this.cookieService.getObject('username') : '';
+  };
   public getUserId() {
     return this.cookieService.getObject('id') !== null ? this.cookieService.getObject('id') : '';
   };
@@ -42,9 +48,17 @@ export class AuthenticationService {
     this.cookieService.removeAll();
     this.router.navigate(['/']);
   }
+  // 0 = add auth in header
+  // 1 = request for access token with refresh token
+  // 2 = clear user session 
   public isAuthenticate() {
-    if (this.getRefreshToken() !== '') {
-      return true
+    if (this.getRefreshToken() !== '' && this.getAccessToken() !== '') {
+      return 0;
+    } else if (this.getRefreshToken() !== '' && this.getAccessToken() === '') {
+      return 1;
+    } else if ((this.getRefreshToken() === '' && this.getAccessToken() === '')
+    || (this.getRefreshToken() === '' && this.getAccessToken() !== '')) {
+      return 2;
     }
   }
  }

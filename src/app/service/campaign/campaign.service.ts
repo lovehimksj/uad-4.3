@@ -10,28 +10,16 @@ export class CampaignService {
     private authenticationService: AuthenticationService
   ) { }
   dashboardCampaign() {
-    this.http.get('http://ads.uahoy.in/uadtest/getdc/?&').subscribe(
-      data => {
-        console.log(data);
-      },
-      (err: HttpErrorResponse) => {
-        if (err.error instanceof Error) {
-        } else {
-        }
-      }
-    );
+    return this.http.get('http://ads.uahoy.in/uadtest/getdc/?&')
+      .map((response: Response) => {
+        return response
+      });
   }
 
-  camapigns() {
-    this.http.get('http://ads.uahoy.in/uadtest/getac/?&aid=' + this.authenticationService.getUserId()).subscribe(
-      data => {
-        console.log(data);
-      },
-      (err: HttpErrorResponse) => {
-        if (err.error instanceof Error) {
-        } else {
-        }
-      }
-    );
+  getCampaigns() {
+    return this.http.get('http://ads.uahoy.in/uadtest/getac/?&aid=' + this.authenticationService.getUserId())
+      .map((response: Response) => {
+        return response
+      });
   }
 }

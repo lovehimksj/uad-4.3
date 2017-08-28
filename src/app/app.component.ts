@@ -13,7 +13,6 @@ export class AppComponent implements OnInit {
     private router: Router
   ) { }
   ngOnInit(): void {
-    console.log(this.authenticationService.getUserScope());
     if (this.authenticationService.isAuthenticate()) {
       if (this.authenticationService.getUserScope() === 'advertiser') {
         this.router.navigate(['advertiser']);
