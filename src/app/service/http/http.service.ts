@@ -69,7 +69,6 @@ export class ApiInterceptor implements HttpInterceptor {
             });
             return next.handle(clonedRequestRepeat).do(event => {
               if (event instanceof HttpResponse) {
-
                 const elapsed = Date.now() - started;
                 console.log('%c Request for ' + req.urlWithParams + ' took ' + elapsed + ' ms.', 'background: #222; color: yellow');
               }
@@ -78,34 +77,6 @@ export class ApiInterceptor implements HttpInterceptor {
         } else {
           return Observable.throw(res);
         }
-
       });
-    // return next.handle(clonedRequest).catch((res) => {
-    //   console.log(res.status);
-    //   errStatus = res.status === 0 ? 401 : res.status;
-    //   if (errStatus === 401 || errStatus === 403) {
-    //     if (this.authenticationService.isAuthenticate() === 1) {
-    //       console.log('is not authorised');
-    //       this.userService.refreshAccessToken()
-    //         .subscribe(
-    //           data => {
-    //             this.authenticationService.setAccessToken(data.json().access_token, data.json().expires_in);
-    //             this.authenticationService.setRefreshToken(data.json().refresh_token);
-    //           },
-    //           error => {
-    //             this.authenticationService.removeCredentials();
-    //             return Observable.throw(res);
-    //           }
-    //         );
-    //       const clonedRequestRepeat = req.clone({
-    //         headers: req.headers.set('Authorization', 'Bearer ' + this.authenticationService.getAccessToken())
-    //       });
-    //       return next.handle(clonedRequestRepeat);
-    //     }
-    //   } else {
-    //     return Observable.throw(res);
-    //   }
-    //   console.log(res);
-    // });
   }
 }
