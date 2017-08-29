@@ -41,6 +41,9 @@ export class AuthenticationService {
   public getAccessToken() {
     return this.cookieService.getObject('access_token') !== undefined ? this.cookieService.getObject('access_token') : '';
   };
+  public getToken() {
+    return this.cookieService.get('access_token') !== undefined ? this.cookieService.getObject('access_token') : '';
+  };
   public getRefreshToken() {
     return this.cookieService.getObject('refresh_token') !== null ? this.cookieService.getObject('refresh_token') : ''
   };
@@ -50,7 +53,7 @@ export class AuthenticationService {
   }
   // 0 = add auth in header
   // 1 = request for access token with refresh token
-  // 2 = clear user session 
+  // 2 = clear user session
   public isAuthenticate() {
     if (this.getRefreshToken() !== '' && this.getAccessToken() !== '') {
       return 0;
