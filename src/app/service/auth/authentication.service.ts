@@ -53,7 +53,7 @@ export class AuthenticationService {
   }
   // 0 = add auth in header
   // 1 = request for access token with refresh token
-  // 2 = clear user session
+  // 2 = clear account session
   public isAuthenticate() {
     if (this.getRefreshToken() !== '' && this.getAccessToken() !== '') {
       return 0;

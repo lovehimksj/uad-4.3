@@ -6,17 +6,22 @@ import { CookieModule } from 'ngx-cookie';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 
 import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './components/login/login.component';
 import { routing } from './app.routing';
-import { AdvertiserComponent } from './advertiser/advertiser.component';
-import { AuthGuard } from './guard/auth.guard';
-import { AuthenticationService} from './service/auth/authentication.service';
-import { AdminComponent } from './admin/admin.component';
-import { RegisterComponent } from './register/register.component';
-import { CampaignService } from './service/campaign/campaign.service';
-import {ApiInterceptor} from './service/http/http.service';
-import { AlertComponent } from './components/alert/alert.component';
-import {AlertService} from './service/http/alert.service';
+import { AdvertiserComponent } from './components/advertiser/advertiser.component';
+import { AdminComponent } from './components/admin/admin.component';
+import { RegisterComponent } from './components/register/register.component';
+
+
+import {AuthenticationInterceptor} from './package/oAuth/authentication-interceptor.service';
+import {CommunicationService, RestApi} from './package/communication';
+import {SessionService} from './package/session/session.service';
+import {AuthenticationGuard} from './package/guards/authentication.guard';
+import {AccountService} from './service/account/account.service';
+import {TokenProvider} from './package/oAuth/token.provider';
+import {TokenMapper} from './package/mapper/token.mapper';
+import {UserMapper} from './package/mapper/user.mapper';
+import {UserProvider} from './package/provider/user.provider';
 import {UserService} from './service/user/user.service';
 
 @NgModule({
@@ -25,8 +30,7 @@ import {UserService} from './service/user/user.service';
     LoginComponent,
     AdvertiserComponent,
     AdminComponent,
-    RegisterComponent,
-    AlertComponent
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -37,16 +41,21 @@ import {UserService} from './service/user/user.service';
     CookieModule.forRoot()
   ],
   providers: [
-    AuthenticationService,
-    CampaignService,
-    AlertService,
+    UserProvider,
+    RestApi,
+    CommunicationService,
+    SessionService,
+    AuthenticationGuard,
+    AccountService,
     UserService,
-    AuthGuard,
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: ApiInterceptor,
+      useClass: AuthenticationInterceptor,
       multi: true,
-    }
+    },
+    TokenProvider,
+    TokenMapper,
+    UserMapper
   ],
   bootstrap: [AppComponent]
 })

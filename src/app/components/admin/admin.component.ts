@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {CampaignService} from '../service/campaign/campaign.service';
-import {AuthenticationService} from '../service/auth/authentication.service';
-import {DashboardCampaign} from '../service/campaign/camapign';
-import {AlertService} from '../service/http/alert.service';
+import {CampaignService} from '../../service/campaign/campaign.service';
+import {AuthenticationService} from '../../service/auth/authentication.service';
+import {DashboardCampaign} from '../../service/campaign/camapign';
+import {AlertService} from '../../service/http/alert.service';
 
 @Component({
   selector: 'app-admin',

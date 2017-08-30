@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {CampaignService} from '../service/campaign/campaign.service';
-import {AuthenticationService} from '../service/auth/authentication.service';
+import {CampaignService} from '../../service/campaign/campaign.service';
+import {AuthenticationService} from '../../service/auth/authentication.service';
 
 @Component({
   selector: 'app-advertiser',

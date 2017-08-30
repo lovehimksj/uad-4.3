@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {AuthenticationService} from './service/auth/authentication.service';
 import {Router} from '@angular/router';
 
 @Component({
@@ -9,18 +8,7 @@ import {Router} from '@angular/router';
 })
 export class AppComponent implements OnInit {
   constructor(
-    private authenticationService: AuthenticationService,
     private router: Router
   ) { }
-  ngOnInit(): void {
-    if (this.authenticationService.isAuthenticate()) {
-      if (this.authenticationService.getUserScope() === 'advertiser') {
-        this.router.navigate(['advertiser']);
-      } else if (this.authenticationService.getUserScope() === 'admin' || this.authenticationService.getUserScope() === 'adteam') {
-        this.router.navigate(['admin'])
-      } else {
-        this.router.navigate(['/'])
-      }
-    }
-  }
+  ngOnInit(): void {}
 }
