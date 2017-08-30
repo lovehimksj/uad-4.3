@@ -1,0 +1,36 @@
+<div class="content" fxLayout="column" fxLayoutAlign="start center">
+    <div class="primary-divider"></div>
+    <div class="sign-container" fxLayout="column" fxLayoutAlign="start center">
+        <div class="form-container">
+            <div fxLayout="column" fxLayoutAlign="center center">
+                <h1 class="logo">PhotoCloud</h1>
+                <div class="header-container" fxLayout="column" fxLayoutAlign="center center">
+                    <span class="title">Sign In</span>
+                    <div class="caption-container" fxLayout="row" fxLayoutAlign="center center">
+                        <span>Sign In to see photos and videos from your friends</span>
+                    </div>
+                </div>
+            </div>
+            <div fxLayout="column" fxLayoutAlign="start center">
+                <form class="form" (ngSubmit)="signIn()">
+                    <div fxLayout="column">
+                        <md-input-container fxFlex>
+                            <input mdInput placeholder="Username" type="text" [(ngModel)]="account.username" name="username" autocomplete="off">
+                        </md-input-container>
+                        <md-input-container fxFlex>
+                            <input mdInput placeholder="Password" type="password" [(ngModel)]="account.password" name="password" autocomplete="off">
+                        </md-input-container>
+                    </div>
+                    <div class="error-container" fxLayout="row" fxLayoutAlign="center center">
+                        <md-progress-spinner color="primary" mode="indeterminate" *ngIf="isLoading"></md-progress-spinner>
+                        <span class="mat-subhead error" *ngIf="errorMessage">{{errorMessage}}</span>
+                    </div>
+                    <div fxLayout="row" fxLayoutAlign="end center">
+                        <button class="signin-button" md-raised-button color="accent" type="sumbit">Sign In</button>
+                    </div>
+                </form>
+                <a [routerLink]="['/account/create']">Don't have an account?</a>
+            </div>
+        </div>
+    </div>
+</div>
