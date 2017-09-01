@@ -7,15 +7,13 @@ export class TokenMapper {
     const accessToken = new AccessToken();
     accessToken.accessToken = response['access_token'];
     accessToken.refreshToken = response['refresh_token'];
+	  accessToken.userId = Number(response['userid']);
+	accessToken.scope = response['scope'];
+	accessToken.username = response['username'];
     accessToken.tokenType = response['token_type'];
     accessToken.expiresIn = response['expires_in'];
-    accessToken.issued = new Date(response['.issued']);
-    accessToken.expires = new Date(response['.expires']);
-    accessToken.userId = Number(response['userId']);
-    accessToken.username = response['userName'];
-    accessToken.isPrivate = JSON.parse(response['isPrivate']);
-    accessToken.isActive = JSON.parse(response['isActive']);
-    accessToken.pictureUri = response['pictureUri'];
+    accessToken.issued = new Date();
+    accessToken.expires = new Date(new Date().getTime() + 24 * 60 * 60 * 1000);
     return accessToken;
   }
 }

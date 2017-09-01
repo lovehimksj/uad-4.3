@@ -23,6 +23,7 @@ import {TokenMapper} from './package/mapper/token.mapper';
 import {UserMapper} from './package/mapper/user.mapper';
 import {UserProvider} from './package/provider/user.provider';
 import {UserService} from './service/user/user.service';
+import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import {UserService} from './service/user/user.service';
     LoginComponent,
     AdvertiserComponent,
     AdminComponent,
-    RegisterComponent
+    RegisterComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

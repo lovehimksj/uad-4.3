@@ -5,22 +5,15 @@ import { Observable } from 'rxjs/Rx';
 import { CommunicationService } from '../communication';
 import {AccessToken} from '../../constructor/token';
 import {TokenProvider} from './token.provider';
-import {CurrentUser} from '../../constructor/current-user';
 
 @Injectable()
 export class AuthenticationInterceptor implements HttpInterceptor {
   constructor(
     private router: Router,
-    private currentUser: CurrentUser,
     private injector: Injector,
     private communicationService: CommunicationService) { }
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     if (req.url.includes('/authorize')) {
-      req = req.clone({
-        setHeaders: {
-          Authorization: `Basic ${ btoa(this.currentUser.username + ':' + this.currentUser.username)}`
-        }
-      });
       return next.handle(req);
     }
     const tokenProvider = this.injector.get(TokenProvider);

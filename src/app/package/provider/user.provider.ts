@@ -42,9 +42,10 @@ export class UserProvider {
     const currentUser: CurrentUser = new CurrentUser(
       accessToken.userId,
       accessToken.username,
-      accessToken.isPrivate,
-      accessToken.isActive,
-      accessToken.pictureUri
+      accessToken.scope,
+      // accessToken.isPrivate,
+      // accessToken.isActive,
+      // accessToken.pictureUri
     );
     return currentUser;
   }
