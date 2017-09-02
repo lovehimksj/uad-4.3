@@ -2,21 +2,21 @@
   admin works!
   <button (click)="logout()">Logout</button>
   <table>
-    <!--<tr *ngFor="let camp of dashboardCampaigns">-->
-      <!--<td>{{camp.campaignName}}</td>-->
-      <!--<td>{{camp.type}}</td>-->
-      <!--<td>{{camp.rate}}</td>-->
-      <!--<td>{{camp.advertiserCurrency}}</td>-->
-      <!--<td>{{camp.campaignCategory}}</td>-->
-      <!--<td>{{camp.campaignId}}</td>-->
-      <!--<td>{{camp.campaignTrackingLink}}</td>-->
-      <!--<td>{{camp.dailyBudget}}</td>-->
-      <!--<td>{{camp.totalBudget}}</td>-->
-      <!--<td>{{camp.dailyCap}}</td>-->
-      <!--<td>{{camp.totalCap}}</td>-->
-      <!--<td>{{camp.status}}</td>-->
-      <!--<td>{{camp.campaignCategory}}</td>-->
-      <!--<td><button>property</button></td>-->
-    <!--</tr>-->
+    <tr *ngFor="let camp of campaignList.mappedCampaigns">
+      <td>{{camp.campaignName}}</td>
+      <td>{{camp.type}}</td>
+      <td>{{camp.rate}}</td>
+      <td>{{camp.advertiserCurrency}}</td>
+      <td>{{camp.campaignCategory}}</td>
+      <td>{{camp.campaignId}}</td>
+      <td>{{camp.campaignTrackingLink}}</td>
+      <td>{{camp.dailyBudget}}</td>
+      <td>{{camp.totalBudget}}</td>
+      <td>{{camp.dailyCap}}</td>
+      <td>{{camp.totalCap}}</td>
+      <td>{{camp.status}}</td>
+      <td>{{camp.campaignCategory}}</td>
+      <td><button>property</button></td>
+    </tr>
   </table>
 

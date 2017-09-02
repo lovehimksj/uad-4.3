@@ -24,6 +24,8 @@ import {UserMapper} from './package/mapper/user.mapper';
 import {UserProvider} from './package/provider/user.provider';
 import {UserService} from './service/user/user.service';
 import { HomeComponent } from './components/home/home.component';
+import {CampaignService} from './service/campaign/campaign.service';
+import {CampaignMapper} from './package/mapper/campaign.mapper';
 
 @NgModule({
   declarations: [
@@ -50,6 +52,7 @@ import { HomeComponent } from './components/home/home.component';
     AuthenticationGuard,
     AccountService,
     UserService,
+    CampaignService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthenticationInterceptor,
@@ -57,6 +60,7 @@ import { HomeComponent } from './components/home/home.component';
     },
     TokenProvider,
     TokenMapper,
+    CampaignMapper,
     UserMapper
   ],
   bootstrap: [AppComponent]

@@ -13,7 +13,6 @@ export class AuthenticationGuard implements CanActivate {
 	canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
 		return this.tokenProvider.getAccessToken()
 			.map(accessToken => {
-				console.log(accessToken);
 				this.communicationService.changeState(accessToken);
 				if (accessToken != null && state.url === '/') {
 					// this.router.navigateByUrl('/');
