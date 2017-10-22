@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {AccountService} from '../../service/account/account.service';
 import {UserLogin} from '../../constructor/user-login';
+import sha256 from 'crypto-js/sha256';
 
 @Component({
 	selector: 'app-login',
@@ -13,9 +14,7 @@ export class LoginComponent implements OnInit {
 	private errorMessage: string;
 	private account: UserLogin = new UserLogin();
 
-	constructor(private accountService: AccountService,
-				private router: Router) {
-	}
+	constructor(private accountService: AccountService, private router: Router) {}
 
 	ngOnInit() {
 		// this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
@@ -25,6 +24,10 @@ export class LoginComponent implements OnInit {
 	login() {
 		this.isLoading = true;
 		this.errorMessage = '';
+		console.log(this.account.password);
+		this.account.password = sha256(this.account.password);
+		console.log(this.account.password);
+		console.log(this.account.password);
 		this.accountService.signIn(this.account)
 			.finally(() => {
 				this.isLoading = false;
@@ -42,5 +45,4 @@ export class LoginComponent implements OnInit {
 				this.errorMessage = error;
 			});
 	}
-
 }

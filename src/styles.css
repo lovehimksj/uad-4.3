@@ -1,0 +1,19 @@
+/*body {*/
+	/*min-height: 75rem;*/
+	/*padding-top: 4.5rem;*/
+/*}*/
+select.form-control:not([size]):not([multiple]), select.form-control {
+	background-image: url("/app-assets/images/icons/arrow_down_48px.svg");
+	background-repeat: no-repeat;
+	background-position: center right;
+	background-size: 25px;
+}
+.pull-left {
+	float: left;
+}
+.pull-right {
+	float: right;
+}
+.modal-custom {
+	min-width: 85%;
+}

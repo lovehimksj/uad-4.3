@@ -21,5 +21,7 @@ export class Campaign {
 	campaignTargetingDeviceType: any;
 	campaignTargetingOs: any;
 	campaignTargetingSource: any;
-	updatedOn: Date
+	updatedOn: Date;
+	campaignStartDate: Date;
+	campaignEndDate: Date;
 }

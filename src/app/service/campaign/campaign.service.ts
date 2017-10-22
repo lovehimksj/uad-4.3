@@ -15,7 +15,7 @@ export class CampaignService {
 				private campaignMapper: CampaignMapper) {
 	}
 
-	getAllCampaign(): Observable<Collection<Campaign>> {
+	public getAllCampaign(): Observable<Collection<Campaign>> {
 		const url = environment.getDashboardCampaigns;
 		return this.restApi.get<Collection<Campaign>>(url, null);
 	}
@@ -33,7 +33,7 @@ export class CampaignService {
 			.map(response => this.campaignMapper.mapResponseToCampaign(response, cType));
 	}
 
-	updateCampaignStatusById(aId: string, cId: string, cStatus: string) {
+	public updateCampaignStatusById(aId: string, cId: string, cStatus: string) {
 		const url = environment.updateStatus;
 		const requestParam = new HttpParams().set('status', cStatus).set('cid', cId).set('aid', aId);
 		return this.restApi.post(url, requestParam, null);

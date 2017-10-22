@@ -1,3 +1,36 @@
-<p>
-  register works!
-</p>
+<div class="col-md-12 col-lg-12 col-sm-12 col-12 col-xl-12">
+	<h2>Register</h2>
+	<form name="form" (ngSubmit)="f.form.valid && register()" #f="ngForm" novalidate  autocomplete="off">
+		<div class="form-group" [ngClass]="{ 'has-error': f.submitted && !advertiserEmailId.valid }">
+			<label for="advertiserEmailId">advertiserEmailId</label>
+			<input type="text" id="advertiserEmailId" class="form-control" name="advertiserEmailId" [(ngModel)]="account.advertiserEmailId" #advertiserEmailId="ngModel" required/>
+			<div *ngIf="f.submitted && !advertiserEmailId.valid" class="help-block">Email is required</div>
+		</div>
+		
+		<div class="form-group" [ngClass]="{ 'has-error': f.submitted && !companyName.valid }">
+			<label for="companyName">companyName</label>
+			<input type="text" id="companyName" class="form-control" name="companyName" [(ngModel)]="account.companyName" #companyName="ngModel" required/>
+			<div *ngIf="f.submitted && !companyName.valid" class="help-block">Company Name is required</div>
+		</div>
+		
+		<div class="form-group" [ngClass]="{ 'has-error': f.submitted && !advertiserName.valid }">
+			<label for="advertiserName">advertiserName</label>
+			<input type="text" id="advertiserName" class="form-control" name="advertiserName" [(ngModel)]="account.advertiserName" #advertiserName="ngModel" required/>
+			<div *ngIf="f.submitted && !advertiserName.valid" class="help-block">Advertiser Name is required</div>
+		</div>
+		
+		<div class="form-group" [ngClass]="{ 'has-error': f.submitted && !advertiserMobileNumber.valid }">
+			<label for="advertiserMobileNumber">advertiserMobileNumber</label>
+			<input type="text" id="advertiserMobileNumber" class="form-control" name="advertiserMobileNumber" [(ngModel)]="account.advertiserMobileNumber" #advertiserMobileNumber="ngModel" required/>
+			<div *ngIf="f.submitted && !advertiserMobileNumber.valid" class="help-block">Advertiser Mobile Number is required</div>
+		</div>
+		
+		<div class="form-group" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
+			<label for="password">password</label>
+			<input type="password" id="password" class="form-control" name="password" [(ngModel)]="account.password" #password="ngModel" required/>
+			<div *ngIf="f.submitted && !password.valid" class="help-block">Password is required</div>
+		</div>
+		<button [disabled]="loading" class="btn btn-primary">Register</button>
+	</form>
+</div>
+

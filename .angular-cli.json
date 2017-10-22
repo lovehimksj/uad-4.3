@@ -1,64 +1,84 @@
 {
-  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-  "project": {
-    "name": "uad"
-  },
-  "apps": [
-    {
-      "root": "src",
-      "outDir": "dist",
-      "assets": [
-        "assets",
-        "favicon.ico",
-        "js",
-        "images"
-      ],
-      "index": "index.html",
-      "main": "main.ts",
-      "polyfills": "polyfills.ts",
-      "test": "test.ts",
-      "tsconfig": "tsconfig.app.json",
-      "testTsconfig": "tsconfig.spec.json",
-      "prefix": "app",
-      "styles": [
-        "../node_modules/bootstrap/dist/css/bootstrap.min.css",
-        "styles.css"
-      ],
-      "scripts": [
-        "../node_modules/jquery/dist/jquery.min.js",
-        "../node_modules/tether/dist/js/tether.min.js",
-        "../node_modules/bootstrap/dist/js/bootstrap.min.js"
-      ],
-      "environmentSource": "environments/environment.ts",
-      "environments": {
-        "dev": "environments/environment.ts",
-        "prod": "environments/environment.prod.ts"
-      }
-    }
-  ],
-  "e2e": {
-    "protractor": {
-      "config": "./protractor.conf.js"
-    }
-  },
-  "lint": [
-    {
-      "project": "src/tsconfig.app.json"
-    },
-    {
-      "project": "src/tsconfig.spec.json"
-    },
-    {
-      "project": "e2e/tsconfig.e2e.json"
-    }
-  ],
-  "test": {
-    "karma": {
-      "config": "./karma.conf.js"
-    }
-  },
-  "defaults": {
-    "styleExt": "css",
-    "component": {}
-  }
+	"$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+	"project": {
+		"name": "uad"
+	},
+	"apps": [
+		{
+			"root": "src",
+			"outDir": "dist",
+			"assets": [
+				"assets",
+				"app-assets",
+				"favicon.ico",
+				"js",
+				"images"
+			],
+			"index": "index.html",
+			"main": "main.ts",
+			"polyfills": "polyfills.ts",
+			"test": "test.ts",
+			"tsconfig": "tsconfig.app.json",
+			"testTsconfig": "tsconfig.spec.json",
+			"prefix": "app",
+			"styles": [
+				"app-assets/css/bootstrap.css",
+				"app-assets/fonts/icomoon.css",
+				"app-assets/fonts/flag-icon-css/css/flag-icon.min.css",
+				"app-assets/vendors/css/extensions/pace.css",
+				"app-assets/css/bootstrap-extended.css",
+				"app-assets/css/colors.css",
+				"app-assets/css/core/menu/menu-types/vertical-menu.css",
+				"app-assets/css/core/menu/menu-types/vertical-overlay-menu.css",
+				"app-assets/css/core/colors/palette-gradient.css",
+				"assets/css/style.css",
+				"app-assets/css/app.css",
+				"styles.css"
+			],
+			"scripts": [
+				"../node_modules/jquery/dist/jquery.min.js",
+				"../node_modules/tether/dist/js/tether.min.js",
+				"app-assets/vendors/js/ui/tether.min.js",
+				"app-assets/js/core/libraries/bootstrap.min.js",
+				"app-assets/vendors/js/ui/perfect-scrollbar.jquery.min.js",
+				"app-assets/vendors/js/ui/unison.min.js",
+				"app-assets/vendors/js/ui/blockUI.min.js",
+				"app-assets/vendors/js/ui/jquery.matchHeight-min.js",
+				"app-assets/vendors/js/ui/screenfull.min.js",
+				"app-assets/vendors/js/extensions/pace.min.js",
+				"app-assets/js/core/app-menu.js",
+				"app-assets/js/core/app.js"
+			],
+			"environmentSource": "environments/environment.ts",
+			"environments": {
+				"dev": "environments/environment.ts",
+				"prod": "environments/environment.prod.ts"
+			}
+		}
+	],
+	"e2e": {
+		"protractor": {
+			"config": "./protractor.conf.js"
+		}
+	},
+	"lint": [
+		{
+			"project": "src/tsconfig.app.json"
+		},
+		{
+			"project": "src/tsconfig.spec.json"
+		},
+		{
+			"project": "e2e/tsconfig.e2e.json"
+		}
+	],
+	"test": {
+		"karma": {
+			"config": "./karma.conf.js"
+		}
+	},
+	"defaults": {
+		"styleExt": "css",
+		"component": {}
+	}
 }

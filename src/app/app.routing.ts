@@ -1,6 +1,7 @@
 import {Routes, RouterModule} from '@angular/router';
-import {AdvertiserComponent} from './components/advertiser/advertiser.component';
-import {AdminComponent} from './components/admin/admin.component';
+import {AdvertiserComponent} from './components/advertiser/advertiser/advertiser.component';
+import {AdminComponent} from './components/admin/campaignDashboard/admin.component';
+
 // import { RegisterComponent } from './register/index';
 import {AuthenticationGuard} from './package/guards/authentication.guard';
 import {HomeComponent} from './components/home/home.component';
